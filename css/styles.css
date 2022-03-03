@@ -13,6 +13,10 @@ img {
   height: 400px;
 }
 
+ul {
+  list-style-type: none;
+}
+
 .placeholder-img {
   margin-top: 3rem;
   margin-bottom: 5rem;
@@ -34,6 +38,7 @@ a:hover {
   margin-top: 3rem;
   border: none;
   border-radius: 0.25rem;
+  font-weight: 300;
 }
 
 .h3-title {
