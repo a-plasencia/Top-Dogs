@@ -8,6 +8,17 @@ header {
   color: white;
 }
 
+img {
+  width: 100%;
+  height: 400px;
+}
+
+.placeholder-img {
+  margin-top: 3rem;
+  margin-bottom: 5rem;
+  object-fit: contain;
+}
+
 a {
   text-decoration: none;
 }
