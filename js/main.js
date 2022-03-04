@@ -2,6 +2,35 @@ var $uList = document.querySelector('.api-dog');
 var $getDog = document.querySelector('.get-dog');
 var $placeholderImg = document.querySelector('.placeholder-img');
 
+function breedNameString(string) {
+  var oneWord;
+  var breedString = string;
+  var arrayString = string.split('');
+  for (var i = 0; i < arrayString.length; i++) {
+    if (arrayString[i] !== '-') {
+      oneWord = true;
+    }
+    if (arrayString[i] === '-') {
+      oneWord = false;
+      break;
+    }
+  }
+  if (oneWord === true) {
+    var firstLetter = breedString.charAt(0).toUpperCase();
+    breedString = firstLetter + breedString.slice(1);
+    return breedString;
+  } else {
+    breedString = breedString.split('-');
+    breedString.reverse();
+    for (var j = 0; j < breedString.length; j++) {
+      var firstLetters = breedString[j].charAt(0).toUpperCase();
+      breedString[j] = firstLetters + breedString[j].slice(1);
+    }
+    breedString = breedString.join(' ');
+    return breedString;
+  }
+}
+
 function get3Images() {
   $placeholderImg.className = 'placeholder-img hidden';
   var $li = document.querySelectorAll('li');
@@ -18,10 +47,22 @@ function get3Images() {
     for (var i = 0; i < xhrImage.response.message.length; i++) {
 
       var listedElement = document.createElement('li');
+      var divElement = document.createElement('div');
+      divElement.setAttribute('class', 'dog-card');
       var imgElement = document.createElement('img');
       imgElement.setAttribute('src', xhrImage.response.message[i]);
       imgElement.setAttribute('class', 'dog-img');
-      listedElement.appendChild(imgElement);
+      imgElement.setAttribute('alt', 'dog');
+      var dogBreedName = xhrImage.response.message[i];
+      dogBreedName = dogBreedName.split('/');
+      dogBreedName = dogBreedName[4];
+      dogBreedName = breedNameString(dogBreedName);
+      var pElement = document.createElement('p');
+      pElement.setAttribute('class', 'breed-name');
+      pElement.textContent = dogBreedName;
+      listedElement.appendChild(divElement);
+      divElement.appendChild(imgElement);
+      divElement.appendChild(pElement);
       $uList.appendChild(listedElement);
     }
 

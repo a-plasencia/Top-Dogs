@@ -14,12 +14,22 @@ ul {
   margin: 0;
 }
 
-.dog-img {
+.breed-name {
+  font-weight: 300;
+  font-size: large;
+  padding-left: 1rem;
+}
+
+.dog-card {
   padding: 1rem;
   margin: 1rem;
+  margin-top: 3rem;
   border: 1px solid #afafaf;
   background-color: white;
   border-radius: 0.5rem;
+}
+
+.dog-img {
   object-fit: contain;
   width: 300px;
   height: 200px;
@@ -45,7 +55,7 @@ a:hover {
   background-color: #343a40;
   color: white;
   padding: 0.5rem 1rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
   border: none;
   border-radius: 0.25rem;
   font-weight: 300;
