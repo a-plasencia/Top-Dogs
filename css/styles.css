@@ -15,15 +15,12 @@ ul {
 .dog-img {
   padding: 1rem;
   margin: 1rem;
-  border: 1px solid lightgray;
-  border-radius: 0.25rem;
+  border: 1px solid #afafaf;
+  background-color: white;
+  border-radius: 0.5rem;
   object-fit: contain;
   width: 300px;
   height: 200px;
-}
-
-.dog-img img {
-  background-color: white;
 }
 
 .placeholder-img {
