@@ -14,8 +14,15 @@
 }
 
 .column-full,
-.column-half {
+.column-half,
+.column-one-third {
   width: 100%;
+}
+
+.justify-center {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 @media screen and (min-width: 768px) {
@@ -24,16 +31,22 @@
   }
 
   .column-full,
-  .column-half {
+  .column-half,
+  .column-one-third {
     padding: 0 0.75rem;
   }
 
   .column-half {
     width: 50%;
   }
-}
 
-.justify-center {
-  justify-content: center;
-  display: flex;
+  .column-one-third {
+    flex-basis: calc(100% / 3);
+  }
+
+  .justify-center {
+    justify-content: center;
+    display: flex;
+    flex-wrap: nowrap;
+  }
 }
