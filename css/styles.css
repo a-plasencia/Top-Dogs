@@ -75,3 +75,8 @@ a:hover {
   justify-content: space-between;
   display: flex;
 }
+
+.fa-star {
+  font-size: 1.4rem;
+  padding-top: 1rem;
+}
