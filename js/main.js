@@ -1,6 +1,8 @@
 var $uList = document.querySelector('.api-dog');
 var $getDog = document.querySelector('.get-dog');
 var $placeholderImg = document.querySelector('.placeholder-img');
+// var $star = document.querySelectorAll('.fa-star');
+var starClicks = true;
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
@@ -89,3 +91,14 @@ function get3Images() {
 }
 
 $getDog.addEventListener('click', get3Images);
+
+function favoriteClick(event) {
+  starClicks = !starClicks;
+  if (starClicks === true) {
+    event.target.className = 'fa-regular fa-star';
+  } else {
+    event.target.className = 'fa-solid fa-star';
+  }
+
+}
+$uList.addEventListener('click', favoriteClick);
