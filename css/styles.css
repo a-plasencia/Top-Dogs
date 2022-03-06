@@ -48,7 +48,11 @@ a {
 }
 
 a:hover {
-  color: default;
+  cursor: pointer;
+}
+
+i:hover {
+  cursor: pointer;
 }
 
 .get-dog {
