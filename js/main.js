@@ -1,7 +1,6 @@
 var $uList = document.querySelector('.api-dog');
 var $getDog = document.querySelector('.get-dog');
 var $placeholderImg = document.querySelector('.placeholder-img');
-// var $star = document.querySelectorAll('.fa-star');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
@@ -67,10 +66,31 @@ function breedNameString(string) {
   }
 }
 
+function checkFavorites() {
+  var $icon = document.querySelectorAll('i');
+  var $dogImage = document.querySelectorAll('.dog-img');
+  var $breedName = document.querySelectorAll('.breed-name');
+
+  for (var i = 0; i < $icon.length; i++) {
+    if ($icon[i].className === 'fa-solid fa-star') {
+      var newEntryObject = {};
+      var dogSrcValue = $dogImage[i].getAttribute('src');
+      var breedName = $breedName[i].textContent;
+      newEntryObject.dogImage = dogSrcValue;
+      newEntryObject.dogName = breedName;
+      newEntryObject.entryId = data.nextEntryId;
+      data.entries.unshift(newEntryObject);
+      data.nextEntryId++;
+    }
+  }
+}
+
 function get3Images() {
   $placeholderImg.className = 'placeholder-img hidden';
+
   var $li = document.querySelectorAll('li');
   if ($li.length !== 0) {
+    checkFavorites();
     for (var j = 0; j < $li.length; j++) {
       $li[j].remove();
     }
@@ -92,8 +112,10 @@ function get3Images() {
 $getDog.addEventListener('click', get3Images);
 
 function favoriteClick(event) {
-  if (event.target.className === 'fa-regular fa-star') {
-    event.target.className = 'fa-solid fa-star';
-  } else { event.target.className = 'fa-regular fa-star'; }
+  if (event.target && event.target.matches('i')) {
+    if (event.target.className === 'fa-regular fa-star') {
+      event.target.className = 'fa-solid fa-star';
+    } else { event.target.className = 'fa-regular fa-star'; }
+  }
 }
 $uList.addEventListener('click', favoriteClick);
