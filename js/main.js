@@ -1,7 +1,8 @@
 var $uList = document.querySelector('.api-dog');
+var $uFav = document.querySelector('.fav-dog');
 var $getDog = document.querySelector('.get-dog');
 var $placeholderImg = document.querySelector('.placeholder-img');
-var $pfav = document.querySelector('.p-favorites');
+var $pFav = document.querySelector('.p-favorites');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
@@ -121,6 +122,15 @@ function favoriteClick(event) {
 }
 $uList.addEventListener('click', favoriteClick);
 
+function renderEntriesLoading(event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    var renderEntriesAppear = renderDogs(data.entries[i].dogImage);
+    $uFav.appendChild(renderEntriesAppear);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', renderEntriesLoading);
+
 if (data.entries.length !== 0) {
-  $pfav.className = 'p-favorites hidden';
+  $pFav.className = 'p-favorites hidden';
 }
