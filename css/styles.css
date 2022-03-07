@@ -48,7 +48,11 @@ a {
 }
 
 a:hover {
-  color: default;
+  cursor: pointer;
+}
+
+i:hover {
+  cursor: pointer;
 }
 
 .get-dog {
@@ -69,4 +73,14 @@ a:hover {
   padding-left: 4rem;
   font-weight: 400;
   font-size: medium;
+}
+
+.justify-between {
+  justify-content: space-between;
+  display: flex;
+}
+
+.fa-star {
+  font-size: 1.4rem;
+  padding-top: 1rem;
 }

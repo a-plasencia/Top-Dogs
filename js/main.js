@@ -2,6 +2,41 @@ var $uList = document.querySelector('.api-dog');
 var $getDog = document.querySelector('.get-dog');
 var $placeholderImg = document.querySelector('.placeholder-img');
 
+function renderDogs(imageString) {
+  var listedElement = document.createElement('li');
+
+  var divParentElement = document.createElement('div');
+  divParentElement.setAttribute('class', 'dog-card');
+
+  var imgElement = document.createElement('img');
+  imgElement.setAttribute('src', imageString);
+  imgElement.setAttribute('class', 'dog-img');
+  imgElement.setAttribute('alt', 'dog');
+
+  var divSibilingElement = document.createElement('div');
+  divSibilingElement.setAttribute('class', 'column-full justify-between');
+
+  var dogBreedName = imageString;
+  dogBreedName = dogBreedName.split('/');
+  dogBreedName = dogBreedName[4];
+  dogBreedName = breedNameString(dogBreedName);
+
+  var pElement = document.createElement('p');
+  pElement.setAttribute('class', 'breed-name');
+  pElement.textContent = dogBreedName;
+
+  var icon = document.createElement('i');
+  icon.setAttribute('class', 'fa-regular fa-star');
+
+  listedElement.appendChild(divParentElement);
+  divParentElement.appendChild(imgElement);
+  divParentElement.appendChild(divSibilingElement);
+  divSibilingElement.appendChild(pElement);
+  divSibilingElement.appendChild(icon);
+
+  return listedElement;
+}
+
 function breedNameString(string) {
   var oneWord;
   var breedString = string;
@@ -31,10 +66,31 @@ function breedNameString(string) {
   }
 }
 
+function checkFavorites() {
+  var $icon = document.querySelectorAll('i');
+  var $dogImage = document.querySelectorAll('.dog-img');
+  var $breedName = document.querySelectorAll('.breed-name');
+
+  for (var i = 0; i < $icon.length; i++) {
+    if ($icon[i].className === 'fa-solid fa-star') {
+      var newEntryObject = {};
+      var dogSrcValue = $dogImage[i].getAttribute('src');
+      var breedName = $breedName[i].textContent;
+      newEntryObject.dogImage = dogSrcValue;
+      newEntryObject.dogName = breedName;
+      newEntryObject.entryId = data.nextEntryId;
+      data.entries.unshift(newEntryObject);
+      data.nextEntryId++;
+    }
+  }
+}
+
 function get3Images() {
   $placeholderImg.className = 'placeholder-img hidden';
+
   var $li = document.querySelectorAll('li');
   if ($li.length !== 0) {
+    checkFavorites();
     for (var j = 0; j < $li.length; j++) {
       $li[j].remove();
     }
@@ -45,25 +101,8 @@ function get3Images() {
   xhrImage.addEventListener('load', function () {
 
     for (var i = 0; i < xhrImage.response.message.length; i++) {
-
-      var listedElement = document.createElement('li');
-      var divElement = document.createElement('div');
-      divElement.setAttribute('class', 'dog-card');
-      var imgElement = document.createElement('img');
-      imgElement.setAttribute('src', xhrImage.response.message[i]);
-      imgElement.setAttribute('class', 'dog-img');
-      imgElement.setAttribute('alt', 'dog');
-      var dogBreedName = xhrImage.response.message[i];
-      dogBreedName = dogBreedName.split('/');
-      dogBreedName = dogBreedName[4];
-      dogBreedName = breedNameString(dogBreedName);
-      var pElement = document.createElement('p');
-      pElement.setAttribute('class', 'breed-name');
-      pElement.textContent = dogBreedName;
-      listedElement.appendChild(divElement);
-      divElement.appendChild(imgElement);
-      divElement.appendChild(pElement);
-      $uList.appendChild(listedElement);
+      var renderDogsAppear = renderDogs(xhrImage.response.message[i]);
+      $uList.appendChild(renderDogsAppear);
     }
 
   });
@@ -71,3 +110,12 @@ function get3Images() {
 }
 
 $getDog.addEventListener('click', get3Images);
+
+function favoriteClick(event) {
+  if (event.target && event.target.matches('i')) {
+    if (event.target.className === 'fa-regular fa-star') {
+      event.target.className = 'fa-solid fa-star';
+    } else { event.target.className = 'fa-regular fa-star'; }
+  }
+}
+$uList.addEventListener('click', favoriteClick);
