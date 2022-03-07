@@ -65,6 +65,16 @@ i:hover {
   font-weight: 300;
 }
 
+.find-dog {
+  background-color: #343a40;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-top: 2rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-weight: 300;
+}
+
 .h3-title {
   background-color: #343a40;
   margin-top: auto;
@@ -73,6 +83,13 @@ i:hover {
   padding-left: 4rem;
   font-weight: 400;
   font-size: medium;
+}
+
+.p-favorites {
+  text-align: center;
+  font-size: large;
+  font-weight: 350;
+  margin-top: 3rem;
 }
 
 .justify-between {

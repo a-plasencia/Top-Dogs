@@ -1,6 +1,7 @@
 var $uList = document.querySelector('.api-dog');
 var $getDog = document.querySelector('.get-dog');
 var $placeholderImg = document.querySelector('.placeholder-img');
+var $pfav = document.querySelector('.p-favorites');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
@@ -119,3 +120,7 @@ function favoriteClick(event) {
   }
 }
 $uList.addEventListener('click', favoriteClick);
+
+if (data.entries.length !== 0) {
+  $pfav.className = 'p-favorites hidden';
+}
