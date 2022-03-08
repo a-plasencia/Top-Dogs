@@ -23,7 +23,7 @@ ul {
 .dog-card {
   padding: 1rem;
   margin: 1rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
   border: 1px solid #afafaf;
   background-color: white;
   border-radius: 0.5rem;
@@ -78,11 +78,19 @@ i:hover {
 .h3-title {
   background-color: #343a40;
   margin-top: auto;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 1.2rem;
+  padding-bottom: 0.2rem;
   padding-left: 4rem;
   font-weight: 400;
   font-size: medium;
+}
+
+.nav-item {
+  padding-top: 1.2rem;
+  padding-left: 2rem;
+  font-weight: 300;
+  font-size: medium;
+  color: white;
 }
 
 .p-favorites {
@@ -100,4 +108,9 @@ i:hover {
 .fa-star {
   font-size: 1.4rem;
   padding-top: 1rem;
+}
+
+.justify-left {
+  justify-content: flex-start;
+  display: flex;
 }
