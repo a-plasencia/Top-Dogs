@@ -8,6 +8,7 @@ var $findDog = document.querySelector('.find-dog');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
+  listedElement.setAttribute('class', 'random-dogs');
 
   var divParentElement = document.createElement('div');
   divParentElement.setAttribute('class', 'dog-card');
@@ -89,16 +90,30 @@ function checkFavorites() {
   }
 }
 
-function get3Images() {
+function renderFavorites() {
+  var $icon = document.querySelectorAll('i');
+  for (var i = 0; i < $icon.length; i++) {
+    $icon[i].className = 'fa-solid fa-star';
+  }
+}
+
+function removeLi() {
   $placeholderImg.className = 'placeholder-img hidden';
 
   var $li = document.querySelectorAll('li');
   if ($li.length !== 0) {
-    checkFavorites();
+
     for (var j = 0; j < $li.length; j++) {
       $li[j].remove();
     }
   }
+}
+
+function get3Images() {
+  checkFavorites();
+  removeLi();
+  $placeholderImg.className = 'placeholder-img hidden';
+
   var xhrImage = new XMLHttpRequest();
   xhrImage.open('GET', 'https://dog.ceo/api/breeds/image/random/3');
   xhrImage.responseType = 'json';
@@ -128,7 +143,9 @@ function renderEntriesLoading(event) {
   for (var i = 0; i < data.entries.length; i++) {
     var renderEntriesAppear = renderDogs(data.entries[i].dogImage);
     $uFav.appendChild(renderEntriesAppear);
+
   }
+  renderFavorites();
 }
 
 window.addEventListener('DOMContentLoaded', renderEntriesLoading);
@@ -143,13 +160,21 @@ function viewChange(stringView) {
 }
 
 $navFav.addEventListener('click', function () {
+  if (data.entries.length !== 0) {
+    $pFav.className = 'p-favorites hidden';
+  }
   data.view = 'favorite-dogs';
   viewChange('favorite-dogs');
 });
 
 $findDog.addEventListener('click', function () {
   data.view = 'find-dogs';
+  var $icon = document.querySelectorAll('i');
+  for (var i = 0; i < $icon.length; i++) {
+    $icon[i].className = 'fa-regular fa-star';
+  }
   viewChange('find-dogs');
+
 });
 
 if (data.entries.length !== 0) {
