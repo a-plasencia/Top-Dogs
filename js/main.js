@@ -162,6 +162,14 @@ function viewChange(stringView) {
 $navFav.addEventListener('click', function () {
   if (data.entries.length !== 0) {
     $pFav.className = 'p-favorites hidden';
+    var $liList = document.querySelectorAll('li');
+    if ($liList.length === 0) {
+      for (var i = 0; i < data.entries.length; i++) {
+        var renderFavOnNav = renderDogs(data.entries[i].dogImage);
+        $uFav.appendChild(renderFavOnNav);
+      }
+    }
+    renderFavorites();
   }
   data.view = 'favorite-dogs';
   viewChange('favorite-dogs');
@@ -169,10 +177,12 @@ $navFav.addEventListener('click', function () {
 
 $findDog.addEventListener('click', function () {
   data.view = 'find-dogs';
-  var $icon = document.querySelectorAll('i');
-  for (var i = 0; i < $icon.length; i++) {
-    $icon[i].className = 'fa-regular fa-star';
-  }
+  $placeholderImg.className = 'placeholder-img ';
+  removeLi();
+  // var $icon = document.querySelectorAll('i');
+  // for (var i = 0; i < $icon.length; i++) {
+  //   $icon[i].className = 'fa-regular fa-star';
+  // }
   viewChange('find-dogs');
 
 });
