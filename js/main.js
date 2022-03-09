@@ -3,6 +3,8 @@ var $uFav = document.querySelector('.fav-dog');
 var $getDog = document.querySelector('.get-dog');
 var $placeholderImg = document.querySelector('.placeholder-img');
 var $pFav = document.querySelector('.p-favorites');
+var $navFav = document.querySelector('.nav-item');
+var $findDog = document.querySelector('.find-dog');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
@@ -130,6 +132,25 @@ function renderEntriesLoading(event) {
 }
 
 window.addEventListener('DOMContentLoaded', renderEntriesLoading);
+
+function viewChange(stringView) {
+  var $views = document.querySelectorAll('[data-view]');
+  for (var i = 0; i < $views.length; i++) {
+    if ($views[i].getAttribute('data-view') === stringView) {
+      $views[i].className = ' ';
+    } else { $views[i].className = ' hidden'; }
+  }
+}
+
+$navFav.addEventListener('click', function () {
+  data.view = 'favorite-dogs';
+  viewChange('favorite-dogs');
+});
+
+$findDog.addEventListener('click', function () {
+  data.view = 'find-dogs';
+  viewChange('find-dogs');
+});
 
 if (data.entries.length !== 0) {
   $pFav.className = 'p-favorites hidden';
