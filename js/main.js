@@ -1,6 +1,10 @@
 var $uList = document.querySelector('.api-dog');
+var $uFav = document.querySelector('.fav-dog');
 var $getDog = document.querySelector('.get-dog');
 var $placeholderImg = document.querySelector('.placeholder-img');
+var $pFav = document.querySelector('.p-favorites');
+var $navFav = document.querySelector('.nav-item');
+var $findDog = document.querySelector('.find-dog');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
@@ -70,7 +74,6 @@ function checkFavorites() {
   var $icon = document.querySelectorAll('i');
   var $dogImage = document.querySelectorAll('.dog-img');
   var $breedName = document.querySelectorAll('.breed-name');
-
   for (var i = 0; i < $icon.length; i++) {
     if ($icon[i].className === 'fa-solid fa-star') {
       var newEntryObject = {};
@@ -85,16 +88,30 @@ function checkFavorites() {
   }
 }
 
-function get3Images() {
+function renderFavorites() {
+  var $icon = document.querySelectorAll('i');
+  for (var i = 0; i < $icon.length; i++) {
+    $icon[i].className = 'fa-solid fa-star';
+  }
+}
+
+function removeLi() {
   $placeholderImg.className = 'placeholder-img hidden';
 
   var $li = document.querySelectorAll('li');
   if ($li.length !== 0) {
-    checkFavorites();
+
     for (var j = 0; j < $li.length; j++) {
       $li[j].remove();
     }
   }
+}
+
+function get3Images() {
+  checkFavorites();
+  removeLi();
+  $placeholderImg.className = 'placeholder-img hidden';
+
   var xhrImage = new XMLHttpRequest();
   xhrImage.open('GET', 'https://dog.ceo/api/breeds/image/random/3');
   xhrImage.responseType = 'json';
@@ -119,3 +136,61 @@ function favoriteClick(event) {
   }
 }
 $uList.addEventListener('click', favoriteClick);
+
+function renderEntriesLoading(event) {
+  if (data.view === 'favorite-dogs') {
+    for (var i = 0; i < data.entries.length; i++) {
+      var renderEntriesAppear = renderDogs(data.entries[i].dogImage);
+      $uFav.appendChild(renderEntriesAppear);
+
+    }
+    renderFavorites();
+  }
+}
+
+window.addEventListener('DOMContentLoaded', renderEntriesLoading);
+
+function viewChange(stringView) {
+  var $views = document.querySelectorAll('[data-view]');
+  for (var i = 0; i < $views.length; i++) {
+    if ($views[i].getAttribute('data-view') === stringView) {
+      $views[i].className = ' ';
+    } else { $views[i].className = ' hidden'; }
+  }
+}
+
+$navFav.addEventListener('click', function () {
+  if (data.view !== 'favorite-dogs') {
+    checkFavorites();
+    removeLi();
+    for (var i = 0; i < data.entries.length; i++) {
+      var renderFavOnNav = renderDogs(data.entries[i].dogImage);
+      $uFav.appendChild(renderFavOnNav);
+    }
+    renderFavorites();
+  }
+  if (data.entries.length !== 0) {
+    $pFav.className = 'p-favorites hidden';
+  }
+  data.view = 'favorite-dogs';
+  viewChange('favorite-dogs');
+});
+
+$findDog.addEventListener('click', function () {
+  data.view = 'find-dogs';
+  removeLi();
+  $placeholderImg.className = 'placeholder-img ';
+  viewChange('find-dogs');
+});
+
+if (data.entries.length !== 0) {
+  $pFav.className = 'p-favorites hidden';
+} else { $pFav.className = 'p-favorites '; }
+
+if (data.view === 'find-dogs') {
+  viewChange('find-dogs');
+}
+
+if (data.view === 'favorite-dogs') {
+  viewChange('favorite-dogs');
+}

@@ -17,11 +17,16 @@
 </head>
 <body>
   <header>
-    <h3 class="h3-title">Dog Picture Generator</h3>
+    <div class="row">
+      <div class="column-full justify-left">
+        <h3 class="h3-title">Dog Picture Generator</h3>
+        <a href="#" class="nav-item">Favorites</a>
+      </div>
+    </div>
   </header>
   <main>
     <div class="container">
-      <div data-view="find-dogs">
+      <div data-view="find-dogs" class=" ">
         <div class="row">
           <div class="column-full justify-center">
             <a href="#" class="get-dog">Get Dog</a>
@@ -34,6 +39,18 @@
           <ul class="api-dog column-one-third justify-center">
           </ul>
         </div>
+      </div>
+      <div data-view="favorite-dogs" class=" hidden">
+        <div class="row">
+          <div class="column-full justify-center">
+            <a href="#" class="find-dog">Find Dog</a>
+          </div>
+          <div class="column-full">
+            <p class="p-favorites">No favorites have been recorded</p>
+          </div>
+        </div>
+        <ul class="fav-dog column-one-third justify-center">
+        </ul>
       </div>
     </div>
   </main>
