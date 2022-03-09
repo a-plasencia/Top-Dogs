@@ -8,7 +8,6 @@ var $findDog = document.querySelector('.find-dog');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
-  listedElement.setAttribute('class', 'random-dogs');
 
   var divParentElement = document.createElement('div');
   divParentElement.setAttribute('class', 'dog-card');
@@ -75,7 +74,6 @@ function checkFavorites() {
   var $icon = document.querySelectorAll('i');
   var $dogImage = document.querySelectorAll('.dog-img');
   var $breedName = document.querySelectorAll('.breed-name');
-
   for (var i = 0; i < $icon.length; i++) {
     if ($icon[i].className === 'fa-solid fa-star') {
       var newEntryObject = {};
@@ -140,12 +138,14 @@ function favoriteClick(event) {
 $uList.addEventListener('click', favoriteClick);
 
 function renderEntriesLoading(event) {
-  for (var i = 0; i < data.entries.length; i++) {
-    var renderEntriesAppear = renderDogs(data.entries[i].dogImage);
-    $uFav.appendChild(renderEntriesAppear);
+  if (data.view === 'favorite-dogs') {
+    for (var i = 0; i < data.entries.length; i++) {
+      var renderEntriesAppear = renderDogs(data.entries[i].dogImage);
+      $uFav.appendChild(renderEntriesAppear);
 
+    }
+    renderFavorites();
   }
-  renderFavorites();
 }
 
 window.addEventListener('DOMContentLoaded', renderEntriesLoading);
@@ -160,16 +160,17 @@ function viewChange(stringView) {
 }
 
 $navFav.addEventListener('click', function () {
-  if (data.entries.length !== 0) {
-    $pFav.className = 'p-favorites hidden';
-    var $liList = document.querySelectorAll('li');
-    if ($liList.length === 0) {
-      for (var i = 0; i < data.entries.length; i++) {
-        var renderFavOnNav = renderDogs(data.entries[i].dogImage);
-        $uFav.appendChild(renderFavOnNav);
-      }
+  if (data.view !== 'favorite-dogs') {
+    checkFavorites();
+    removeLi();
+    for (var i = 0; i < data.entries.length; i++) {
+      var renderFavOnNav = renderDogs(data.entries[i].dogImage);
+      $uFav.appendChild(renderFavOnNav);
     }
     renderFavorites();
+  }
+  if (data.entries.length !== 0) {
+    $pFav.className = 'p-favorites hidden';
   }
   data.view = 'favorite-dogs';
   viewChange('favorite-dogs');
@@ -177,14 +178,9 @@ $navFav.addEventListener('click', function () {
 
 $findDog.addEventListener('click', function () {
   data.view = 'find-dogs';
-  $placeholderImg.className = 'placeholder-img ';
   removeLi();
-  // var $icon = document.querySelectorAll('i');
-  // for (var i = 0; i < $icon.length; i++) {
-  //   $icon[i].className = 'fa-regular fa-star';
-  // }
+  $placeholderImg.className = 'placeholder-img ';
   viewChange('find-dogs');
-
 });
 
 if (data.entries.length !== 0) {
