@@ -154,4 +154,12 @@ $findDog.addEventListener('click', function () {
 
 if (data.entries.length !== 0) {
   $pFav.className = 'p-favorites hidden';
+} else { $pFav.className = 'p-favorites '; }
+
+if (data.view === 'find-dogs') {
+  viewChange('find-dogs');
+}
+
+if (data.view === 'favorite-dogs') {
+  viewChange('favorite-dogs');
 }
