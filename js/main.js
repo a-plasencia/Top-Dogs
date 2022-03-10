@@ -5,6 +5,9 @@ var $placeholderImg = document.querySelector('.placeholder-img');
 var $pFav = document.querySelector('.p-favorites');
 var $navFav = document.querySelector('.nav-item');
 var $findDog = document.querySelector('.find-dog');
+var $modal = document.querySelector('#modal');
+var $hrefNo = document.querySelector('.href-no');
+var $hrefYes = document.querySelector('.href-yes');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
@@ -90,7 +93,9 @@ function checkFavorites() {
 
 function renderFavorites() {
   var $icon = document.querySelectorAll('i');
+  var $liFav = document.querySelectorAll('li');
   for (var i = 0; i < $icon.length; i++) {
+    $liFav[i].setAttribute('data-fav-dog', data.entries[i].entryId);
     $icon[i].className = 'fa-solid fa-star';
   }
 }
@@ -136,6 +141,49 @@ function favoriteClick(event) {
   }
 }
 $uList.addEventListener('click', favoriteClick);
+
+function showModal(event) {
+  if (event.target && event.target.matches('i')) {
+    var $liFav = document.querySelectorAll('[data-fav-dog]');
+    var getEntry = event.target.closest('[data-fav-dog]');
+    for (var i = 0; i < $liFav.length; i++) {
+      if ($liFav[i] === getEntry) {
+        data.editing = data.entries[i].entryId;
+      }
+    }
+    $modal.className = 'black-bg ';
+  }
+}
+
+$uFav.addEventListener('click', showModal);
+
+$hrefNo.addEventListener('click', function () {
+  $modal.className = 'black-bg hidden';
+  data.editing = null;
+});
+
+function deleteFavorite(event) {
+  if (data.editing !== null) {
+    var $liFav = document.querySelectorAll('[data-fav-dog]');
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.editing === data.entries[i].entryId) {
+        var getAttributeLi = $liFav[i].getAttribute('data-fav-dog');
+        getAttributeLi = JSON.parse(getAttributeLi);
+        if (data.editing === getAttributeLi) {
+          data.entries.splice(i, 1);
+          $liFav[i].remove();
+        }
+      }
+    }
+    data.editing = null;
+    $modal.className = 'black-bg hidden';
+    if (data.entries.length === 0) {
+      $pFav.className = 'p-favorites ';
+    }
+  }
+}
+
+$hrefYes.addEventListener('click', deleteFavorite);
 
 function renderEntriesLoading(event) {
   if (data.view === 'favorite-dogs') {
