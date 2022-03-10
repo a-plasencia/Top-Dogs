@@ -27,7 +27,7 @@
 
 @media screen and (min-width: 768px) {
   .container {
-    max-width: 900px;
+    max-width: 1200px;
   }
 
   .column-full,
@@ -47,6 +47,6 @@
   .justify-center {
     justify-content: center;
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
   }
 }
