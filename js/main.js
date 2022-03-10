@@ -5,6 +5,9 @@ var $placeholderImg = document.querySelector('.placeholder-img');
 var $pFav = document.querySelector('.p-favorites');
 var $navFav = document.querySelector('.nav-item');
 var $findDog = document.querySelector('.find-dog');
+var $modal = document.querySelector('#modal');
+// var $hrefNo = document.querySelector('.href-no');
+// var $hrefYes = document.querySelector('.href-yes');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
@@ -136,6 +139,12 @@ function favoriteClick(event) {
   }
 }
 $uList.addEventListener('click', favoriteClick);
+
+function showModal(event) {
+  $modal.className = 'black-bg ';
+}
+
+$uFav.addEventListener('click', showModal);
 
 function renderEntriesLoading(event) {
   if (data.view === 'favorite-dogs') {
