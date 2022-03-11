@@ -8,6 +8,8 @@ var $findDog = document.querySelector('.find-dog');
 var $modal = document.querySelector('#modal');
 var $buttonNo = document.querySelector('.button-no');
 var $buttonYes = document.querySelector('.button-yes');
+var $loading = document.querySelector('.lds-facebook');
+var $pError = document.querySelector('.error');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
@@ -116,19 +118,32 @@ function get3Images() {
   checkFavorites();
   removeLi();
   $placeholderImg.className = 'placeholder-img hidden';
-
+  $pError.className = '.error hidden';
+  $loading.className = 'lds-facebook';
   var xhrImage = new XMLHttpRequest();
   xhrImage.open('GET', 'https://dog.ceo/api/breeds/image/random/3');
   xhrImage.responseType = 'json';
-  xhrImage.addEventListener('load', function () {
 
-    for (var i = 0; i < xhrImage.response.message.length; i++) {
-      var renderDogsAppear = renderDogs(xhrImage.response.message[i]);
-      $uList.appendChild(renderDogsAppear);
+  xhrImage.addEventListener('load', function () {
+    if (xhrImage.status === 200) {
+
+      for (var i = 0; i < xhrImage.response.message.length; i++) {
+        var renderDogsAppear = renderDogs(xhrImage.response.message[i]);
+        $uList.appendChild(renderDogsAppear);
+      }
+    } else {
+      $pError.className = '.error ';
     }
+    $loading.className = 'lds-facebook hidden';
+
+  });
+  xhrImage.addEventListener('error', function () {
+    $loading.className = 'lds-facebook hidden';
+    $pError.className = '.error ';
 
   });
   xhrImage.send();
+
 }
 
 $getDog.addEventListener('click', get3Images);
