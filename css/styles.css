@@ -97,6 +97,13 @@ i:hover {
   margin-top: 2rem;
 }
 
+.error {
+  text-align: center;
+  font-size: large;
+  font-weight: 350;
+  margin-top: 2rem;
+}
+
 .justify-between {
   justify-content: space-between;
   display: flex;
