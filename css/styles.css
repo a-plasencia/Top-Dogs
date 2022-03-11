@@ -21,8 +21,8 @@ ul {
 }
 
 .dog-card {
-  padding: 1rem;
-  margin: 1rem;
+  padding: 0.7rem;
+  margin: 0.5rem;
   margin-top: 2rem;
   border: 1px solid #afafaf;
   background-color: white;
@@ -47,10 +47,7 @@ a {
   text-decoration: none;
 }
 
-a:hover {
-  cursor: pointer;
-}
-
+a:hover,
 i:hover {
   cursor: pointer;
 }
@@ -142,7 +139,7 @@ i:hover {
   padding-top: 0.2rem;
 }
 
-.href-yes {
+.button-yes {
   background-color: #dc3545;
   color: white;
   font-weight: 300;
@@ -153,7 +150,7 @@ i:hover {
   border-radius: 0.25rem;
 }
 
-.href-no {
+.button-no {
   background-color: #6c757d;
   color: white;
   font-weight: 300;
