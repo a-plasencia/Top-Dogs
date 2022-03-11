@@ -118,6 +118,7 @@ function get3Images() {
   checkFavorites();
   removeLi();
   $placeholderImg.className = 'placeholder-img hidden';
+  $pError.className = '.error hidden';
   $loading.className = 'lds-facebook';
   var xhrImage = new XMLHttpRequest();
   xhrImage.open('GET', 'https://dog.ceo/api/breeds/image/random/3');
@@ -125,6 +126,7 @@ function get3Images() {
 
   xhrImage.addEventListener('load', function () {
     if (xhrImage.status === 200) {
+
       for (var i = 0; i < xhrImage.response.message.length; i++) {
         var renderDogsAppear = renderDogs(xhrImage.response.message[i]);
         $uList.appendChild(renderDogsAppear);
@@ -135,7 +137,13 @@ function get3Images() {
     $loading.className = 'lds-facebook hidden';
 
   });
+  xhrImage.addEventListener('error', function () {
+    $loading.className = 'lds-facebook hidden';
+    $pError.className = '.error ';
+
+  });
   xhrImage.send();
+
 }
 
 $getDog.addEventListener('click', get3Images);
