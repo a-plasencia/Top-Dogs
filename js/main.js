@@ -8,6 +8,7 @@ var $findDog = document.querySelector('.find-dog');
 var $modal = document.querySelector('#modal');
 var $buttonNo = document.querySelector('.button-no');
 var $buttonYes = document.querySelector('.button-yes');
+var $loading = document.querySelector('.lds-facebook');
 
 function renderDogs(imageString) {
   var listedElement = document.createElement('li');
@@ -116,7 +117,7 @@ function get3Images() {
   checkFavorites();
   removeLi();
   $placeholderImg.className = 'placeholder-img hidden';
-
+  $loading.className = 'lds-facebook';
   var xhrImage = new XMLHttpRequest();
   xhrImage.open('GET', 'https://dog.ceo/api/breeds/image/random/3');
   xhrImage.responseType = 'json';
@@ -126,9 +127,10 @@ function get3Images() {
       var renderDogsAppear = renderDogs(xhrImage.response.message[i]);
       $uList.appendChild(renderDogsAppear);
     }
-
+    $loading.className = 'lds-facebook hidden';
   });
   xhrImage.send();
+
 }
 
 $getDog.addEventListener('click', get3Images);

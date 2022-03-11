@@ -164,6 +164,7 @@ i:hover {
 .lds-facebook {
   display: inline-block;
   position: relative;
+  margin-top: 4rem;
   width: 80px;
   height: 80px;
 }
