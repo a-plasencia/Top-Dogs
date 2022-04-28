@@ -34,8 +34,8 @@ Try the application live at [https://a-plasencia.github.io/Top-Dogs/#](https://a
 1. Clone the repository
 
     ```shell
-    git clone git@github.com:<you>/Top-Dogs.git
-    cd top-dogs
+    git clone git@github.com:a-plasencia/Top-Dogs.git
+    cd Top-Dogs
     ```
 
 2. Open index.html
