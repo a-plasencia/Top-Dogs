@@ -17,20 +17,19 @@ ul {
 .breed-name {
   font-weight: 300;
   font-size: large;
-  padding-left: 1rem;
 }
 
 .dog-card {
-  padding: 0.7rem;
   margin: 0.5rem;
   margin-top: 2rem;
   border: 1px solid #afafaf;
   background-color: white;
   border-radius: 0.5rem;
+  overflow: hidden;
 }
 
 .dog-img {
-  object-fit: contain;
+  object-fit: cover;
   width: 300px;
   height: 200px;
 }
@@ -105,19 +104,9 @@ i:hover {
   margin-top: 2rem;
 }
 
-.justify-between {
-  justify-content: space-between;
-  display: flex;
-}
-
 .fa-star {
   font-size: 1.4rem;
   padding-top: 1rem;
-}
-
-.justify-left {
-  justify-content: flex-start;
-  display: flex;
 }
 
 .black-bg {

@@ -23,7 +23,7 @@ function renderDogs(imageString) {
   imgElement.setAttribute('alt', 'dog');
 
   var divSibilingElement = document.createElement('div');
-  divSibilingElement.setAttribute('class', 'column-full justify-between');
+  divSibilingElement.setAttribute('class', 'column-full justify-between pr-1 pl-1');
 
   var dogBreedName = imageString;
   dogBreedName = dogBreedName.split('/');

@@ -44,3 +44,21 @@
     flex-wrap: wrap;
   }
 }
+
+.justify-between {
+  justify-content: space-between;
+  display: flex;
+}
+
+.justify-left {
+  justify-content: flex-start;
+  display: flex;
+}
+
+.pr-1 {
+  padding-right: 1rem;
+}
+
+.pl-1 {
+  padding-left: 1rem;
+}
